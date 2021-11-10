@@ -1,2 +1,5 @@
-*.class
-build/
+*
+!*/**/*.java
+!pom.xml
+!README.md
+!.gitignore
