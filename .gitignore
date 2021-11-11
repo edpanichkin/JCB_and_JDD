@@ -1,5 +1,7 @@
-*
+*.class
+*.jar
 !*.java
 !pom.xml
 !README.md
 !.gitignore
+target/**

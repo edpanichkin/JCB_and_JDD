@@ -1,8 +1,8 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>academy.kovalevskyi.codingbootcamp.week0.day2</groupId>
-  <artifactId>HelloWorld</artifactId>
+  <groupId>academy.kovalevskyi.codingbootcamp.week0.day3</groupId>
+  <artifactId>JavaEntryChallenge</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
 
@@ -23,7 +23,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <mainClass>
-                    academy.kovalevskyi.codingbootcamp.week0.day2.Main
+                    academy.kovalevskyi.codingbootcamp.week0.day3.JavaEntryChallenge
                 </mainClass>
               </manifest>
             </archive>
@@ -41,7 +41,7 @@
               </execution>
             </executions>
           <configuration>
-            <mainClass>academy.kovalevskyi.codingbootcamp.week0.day2.Main</mainClass>
+            <mainClass>academy.kovalevskyi.codingbootcamp.week0.day3.JavaEntryChallenge</mainClass>
           </configuration>
         </plugin>
       </plugins>
