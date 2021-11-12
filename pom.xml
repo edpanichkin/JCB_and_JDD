@@ -1,15 +1,15 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>academy.kovalevskyi.codingbootcamp.week0.day3</groupId>
-  <artifactId>JavaEntryChallenge</artifactId>
+  <groupId>academy.kovalevskyi.codingbootcamp.week0.day4</groupId>
+  <artifactId>AlphaNum</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>16</maven.compiler.source>
-    <maven.compiler.target>16</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <build>
@@ -17,13 +17,13 @@
       <plugins>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>3.2.0</version>
           <configuration>
             <archive>
               <manifest>
                 <addClasspath>true</addClasspath>
                 <mainClass>
-                    academy.kovalevskyi.codingbootcamp.week0.day3.JavaEntryChallenge
+                    academy.kovalevskyi.codingbootcamp.week0.day4.Main
                 </mainClass>
               </manifest>
             </archive>
@@ -41,7 +41,9 @@
               </execution>
             </executions>
           <configuration>
-            <mainClass>academy.kovalevskyi.codingbootcamp.week0.day3.JavaEntryChallenge</mainClass>
+            <mainClass>
+              academy.kovalevskyi.codingbootcamp.week0.day4.Main
+            </mainClass>
           </configuration>
         </plugin>
       </plugins>
