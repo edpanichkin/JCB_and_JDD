@@ -1,6 +1,7 @@
 package academy.kovalevskyi.codingbootcamp.week0.day4;
 
 public class Numbers1 {
+  
   public static int[] generateNumbers() {
     int[] int100 = new int[100];
     for (int i = 0; i < 100; i++) {
@@ -40,30 +41,28 @@ public class Numbers1 {
   public static boolean isNegative(int number) {
     return (number < 0);
   }
-  
-  public static char[] convertToCharArray(int number) {
-    int remainder;
-    int numberCore = number;
-    int numOfDigits = numOfDigits(number);
+
+  public static char[] convertToCharArray(final int number) {
     if (number == 0) {
       return new char[]{'0'};
     }
-    char[] digitsChar = new char[numOfDigits];
-    for (int i = numOfDigits - 1; i >= 0; i--) {
-      remainder = ((number % 10) > 0) ? (number % 10) : (-1 * (number % 10)); 
-      digitsChar[i] = (char) (remainder + 48);
-      number /= 10;
+    int remainder;
+    int num = number;
+    int numOfDigits = numOfDigits(number);
+    boolean isNegative = number < 0;
+    char[] digitsChar;
+    if (isNegative) {
+      digitsChar = new char[numOfDigits + 1];
+      digitsChar[0] = '-';
+    } else {
+      digitsChar = new char[numOfDigits];
     }
-    return (numberCore > 0) ? digitsChar : addMinusToCharArr(digitsChar);
-  }
-
-  private static char[] addMinusToCharArr(char[] charArr) {
-    char[] minusCharArr = new char[charArr.length + 1];
-    minusCharArr[0] = (char) 45;
-    for (int i = 0; i < charArr.length; i++) {
-      minusCharArr[i + 1] = charArr[i];
+    for (int i = digitsChar.length - 1; (isNegative ? i > 0 : i >= 0); i--) {
+      remainder = num % 10;
+      digitsChar[i] = isNegative ? (char) (-1 * remainder + 48) : (char) (remainder + 48); 
+      num /= 10;
     }
-    return minusCharArr;
+    return digitsChar;
   }
 
   public static int numOfDigits(int number) {
