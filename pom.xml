@@ -1,8 +1,8 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>academy.kovalevskyi.codingbootcamp.week0.day4</groupId>
-  <artifactId>AlphaNum</artifactId>
+  <groupId>academy.kovalevskyi.codingbootcamp</groupId>
+  <artifactId>NumUtils</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
 
@@ -21,9 +21,8 @@
           <configuration>
             <archive>
               <manifest>
-                <addClasspath>true</addClasspath>
                 <mainClass>
-                    academy.kovalevskyi.codingbootcamp.week0.day4.Main
+                    academy.kovalevskyi.codingbootcamp.week1.day0.Main
                 </mainClass>
               </manifest>
             </archive>
@@ -42,7 +41,7 @@
             </executions>
           <configuration>
             <mainClass>
-              academy.kovalevskyi.codingbootcamp.week0.day4.Main
+              academy.kovalevskyi.codingbootcamp.week1.day0.Main
             </mainClass>
           </configuration>
         </plugin>
