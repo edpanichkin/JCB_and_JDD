@@ -101,22 +101,21 @@ public class NumberUtils {
   }
 
   public static boolean isPrime(int target) {
-    System.out.println(target);    
     if (target == 1) {
       return false;
     }
-    if (target <= 0 || target > Integer.MAX_VALUE) {
+    if (target <= 0) {
       throw new IllegalArgumentException();
     }
     for (int i = 2; i < target; i++) {
-      if (target % i == 0 && i < target) {
+      if (target % i == 0) {
         return false;
       } 
     }
     return true; 
   }
 
-  public static int findNextPrime(int target) {
+  public static int findNextPrime(int target) throws IllegalArgumentException {
     if (target < 0) {
       throw new IllegalArgumentException();
     }
