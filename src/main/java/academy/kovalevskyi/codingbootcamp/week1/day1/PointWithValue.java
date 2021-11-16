@@ -20,6 +20,10 @@ public class PointWithValue<T> extends Point {
   public String toString() {
     return "PointWithValue{ X: " + this.getX() + ", Y: " + this.getY()
       + ", value: " + this.getValue() + "}";
+  }
+
+  public <R> PointWithValue<R> mapPoint(Function<T, R> mapFunction) {
+    return new PointWithValue(this.getX(), this.getY(), mapFunction.apply(this.getValue()));
   } 
 }
 

@@ -9,7 +9,7 @@ public class PointWithLabel extends PointWithValue<String> {
   }
 
   public String getLabel() {
-    return (String) super.getValue();
+    return super.getValue();
   }
 
   @Override
