@@ -1,10 +1,10 @@
 package academy.kovalevskyi.codingbootcamp.week1.day0;
 
 public class Point implements Comparable<Point> {
-  private final int coordinateX;
-  private final int coordinateY;
+  public final int coordinateX;
+  public final int coordinateY;
 
-  public Point(final int coordinateX, final int coordinateY) {
+  public Point(int coordinateX, int coordinateY) {
     this.coordinateX = coordinateX;
     this.coordinateY = coordinateY;
   }
