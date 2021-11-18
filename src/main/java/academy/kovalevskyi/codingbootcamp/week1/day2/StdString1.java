@@ -1,6 +1,7 @@
 package academy.kovalevskyi.codingbootcamp.week1.day2;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -100,16 +101,19 @@ public class StdString1 implements Iterable<Character> {
   @Override
   public Iterator<Character> iterator() {
     return new Iterator<Character>() {
-      private StdString1 stdString1;
-      
+      private int index = -1; 
       @Override
       public boolean hasNext() {
-        return false;
+        return index < length() - 1;
       }
       
       @Override
       public Character next() {
-        return null;
+        if (!hasNext()) {
+          throw new NoSuchElementException();   
+        }
+        index++;
+        return charAt(index);
       }
     };
   }

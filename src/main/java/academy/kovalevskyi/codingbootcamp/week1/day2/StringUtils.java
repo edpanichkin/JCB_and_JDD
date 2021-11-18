@@ -1,6 +1,6 @@
 package academy.kovalevskyi.codingbootcamp.week1.day2;
 
-import java.util.stream.IntStream;
+import academy.kovalevskyi.codingbootcamp.week1.day0.NumberUtils;
 
 public class StringUtils {
   public static boolean isAsciiUppercase(char ch) {
@@ -62,17 +62,21 @@ public class StringUtils {
     }
     return new StringBuilder().append(input);
   }
-   
+  
+  public static StringBuilder makeCamel(char[] input) {
+    asciiCheck(input);
+    for (int i = 0; i < input.length; i++) {
+      input[i] = (i % 2 == 0) ? toAsciiLowercase(input[i]) : toAsciiUppercase(input[i]);
+    }
+    return new StringBuilder().append(input);
+  }
+  
   public static StringBuilder makeUppercase(char[] input) {
     return caseChange(input, 1);
   }
 
   public static StringBuilder makeLowercase(char[] input) {
     return caseChange(input, -1);
-  }
-
-  public static StringBuilder makeCamel(char[] input) {
-    return caseChange(input, 0);
   }
 
   public static boolean isStringAlphaNumerical(char[] input) {
@@ -93,8 +97,14 @@ public class StringUtils {
   }
 
   public static char[] concatStrings(char[][] input) {
+    if (input == null) {
+      throw new NullPointerException("Null");
+    }
     if (input.length == 0) {
-      throw new IllegalArgumentException();
+      return new char[]{};    
+    }
+    if (input[0].length == 0) {
+      throw new IllegalArgumentException("2");
     }
     char[] a = input[0].clone();
     char[] b = input[1].clone();
@@ -119,5 +129,24 @@ public class StringUtils {
     }
     return true;
   }
-}
 
+  public static int toInt(char[] input) {
+    if (input.length == 0) {
+      throw new IllegalArgumentException();
+    }
+    asciiCheck(input);
+    boolean isNegative = ((int) input[0] == 45);
+    int result = 0;
+    for (int i = isNegative ? 1 : 0; i < input.length; i++) {
+      char c = input[i];
+      if (isAsciiInRange(c, 48, 57)) {
+        int digit = (int) NumberUtils.power(10, input.length - i - 1);
+        int num = input[i] - 48;
+        result += (digit * num);
+      } else {
+        throw new NumberFormatException();
+      }
+    }
+    return isNegative ? -1 * result : result;
+  }
+}  
