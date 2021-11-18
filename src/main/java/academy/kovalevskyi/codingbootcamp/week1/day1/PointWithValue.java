@@ -23,7 +23,7 @@ public class PointWithValue<T> extends Point {
   }
 
   public <R> PointWithValue<R> mapPoint(Function<T, R> mapFunction) {
-    return new PointWithValue(this.getX(), this.getY(), mapFunction.apply(this.getValue()));
+    return new PointWithValue<>(this.getX(), this.getY(), mapFunction.apply(this.getValue()));
   } 
 }
 

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>academy.kovalevskyi.codingbootcamp</groupId>
-  <artifactId>Points</artifactId>
+  <artifactId>String</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
 
@@ -22,7 +22,7 @@
             <archive>
               <manifest>
                 <mainClass>
-                    academy.kovalevskyi.codingbootcamp.week1.day1.Main
+                    academy.kovalevskyi.codingbootcamp.week1.day2.Main
                 </mainClass>
               </manifest>
             </archive>
@@ -41,7 +41,7 @@
             </executions>
           <configuration>
             <mainClass>
-              academy.kovalevskyi.codingbootcamp.week1.day1.Main
+              academy.kovalevskyi.codingbootcamp.week1.day2.Main
             </mainClass>
           </configuration>
         </plugin>
