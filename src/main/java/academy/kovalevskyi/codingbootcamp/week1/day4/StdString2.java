@@ -27,7 +27,6 @@ public class StdString2 extends StdString1 {
     return new StdString2(upperChars);
   }
 
-  
   public StdString2 subString(int from) {
     return subString(from, length());
   }
@@ -45,23 +44,34 @@ public class StdString2 extends StdString1 {
   }
 
   public StdString2 concat(StdString2... that) {
-    if (that[0].length() == 0) {
-      return new StdString2(new char[]{'H', 'e', 'L', 'L', 'o'});
-    }
     StringBuilder sb = new StringBuilder();
+    sb.append(this.value);
     for (int i = 0; i < that.length; i++) {
-      System.out.print("|");
-      System.out.print(that[i].value);
-      System.out.print("|");
-      sb.append(that[i].value);
+      if (that[i].length() != 0) {
+        sb.append(that[i].value);
+      }
     }
-    char[] result = new char[sb.length()];
-    sb.getChars(0, result.length, result, 0);
-    return new StdString2(result);
-  }
+    return new StdString2(sb.toString().toCharArray());
+  } 
 
   public StdString2[] split(char separator) {
-    return null;
+    int[] count = new int[value.length];
+    int index = 0;
+    for (int i = 0; i < value.length; i++) {
+      if (value[i] != separator) {
+        count[index]++;
+      } else {
+        index++;
+      }
+    }
+    index = (value[length() - 1] != separator) ? ++index : --index;
+    StdString2[] stdResult = new StdString2[index];
+    int pos = 0;
+    for (int i = 0; i < stdResult.length; i++) {
+      stdResult[i] = subString(pos, pos + count[i]);
+      pos += count[i] + 1;
+    }
+    return stdResult;
   }
 
   public StdString2 trim() {
