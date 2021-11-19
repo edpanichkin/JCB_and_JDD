@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class StdString1 implements Iterable<Character> {
-  private final char[] value;
+  public final char[] value;
 
   public StdString1(char[] value) {
     this.value = value.clone();
