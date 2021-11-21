@@ -22,7 +22,7 @@
             <archive>
               <manifest>
                 <mainClass>
-                    academy.kovalevskyi.codingbootcamp.week1.day4.Main
+                    academy.kovalevskyi.codingbootcamp.week1.day3.Main
                 </mainClass>
               </manifest>
             </archive>
@@ -41,7 +41,7 @@
             </executions>
           <configuration>
             <mainClass>
-              academy.kovalevskyi.codingbootcamp.week1.day4.Main
+              academy.kovalevskyi.codingbootcamp.week1.day3.Main
             </mainClass>
           </configuration>
         </plugin>
