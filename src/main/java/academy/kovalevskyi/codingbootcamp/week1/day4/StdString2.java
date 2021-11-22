@@ -94,7 +94,7 @@ public class StdString2 extends StdString1 {
     return new StdString2(trimChars);
   }
 
-    public StdString2 removeCharacter(char toRemove) {
-      return length() == 0 ? new StdString2() : new StdString2().concat(split(toRemove));
-    }
+  public StdString2 removeCharacter(char toRemove) {
+    return length() == 0 ? new StdString2() : new StdString2().concat(split(toRemove));
+  }
 }
