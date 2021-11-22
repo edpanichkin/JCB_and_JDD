@@ -94,21 +94,7 @@ public class StdString2 extends StdString1 {
     return new StdString2(trimChars);
   }
 
-  public StdString2 removeCharacter(char toRemove) {
-    int count = 0;
-    for (int i = 0; i < value.length; i++) {
-      if (value[i] == toRemove) {
-        count++;
-      }
+    public StdString2 removeCharacter(char toRemove) {
+      return length() == 0 ? new StdString2() : new StdString2().concat(split(toRemove));
     }
-    char[] result = new char[length() - count];
-    int charIndex = 0;
-    for (int i = 0; i < value.length; i++) {
-      if (value[i] != toRemove) {
-        result[charIndex] = value[i];
-        charIndex++; 
-      }
-    }
-    return new StdString2(result);
-  }
 }

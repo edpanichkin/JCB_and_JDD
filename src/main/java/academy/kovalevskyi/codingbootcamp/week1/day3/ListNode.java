@@ -33,27 +33,27 @@ public class ListNode<T> {
 
   @Override
   public String toString() {
-    if(prev == null && next == null) {
+    if (prev == null && next == null) {
       return  "Node{" +
                 "prevValue=null" +
                 ", nextValue=null" +
                 ", thisValue=" + value +
                 "}";
-    }       
-    if(prev == null ) {
+    }
+    if(prev == null) {
       return  "Node{" +
                 "prevValue=null" +
                 ", nextValue=" + next.getValue() +
                 ", thisValue=" + value +
                 "}";
-    }       
-    if(next == null ) {
+    }
+    if (next == null) {
       return  "Node{" +
                 "prevValue=" + prev.getValue() +
                 ", nextValue=null" +
                 ", thisValue=" + value +
                 "}";
-    }       
+    }
     return  "Node{" +
                 "prevValue=" + prev.getValue() +
                 ", nextValue=" + next.getValue() +
