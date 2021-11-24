@@ -2,7 +2,7 @@ package academy.kovalevskyi.codingbootcamp.week2.day0;
 
 public class Calculator {
   public static void main(String[] args) {
-    if(args.length != 3) {
+    if (args.length != 3) {
       System.out.println("Please provide 3 input arguments, example: 2 + 3");
       return;
     }
@@ -13,7 +13,7 @@ public class Calculator {
       System.out.println("Division by zero is impossible!");
       return;
     }
-    Number res = switch(op) {
+    Number res = switch (op) {
       case "/"  ->  (double) a / b;
       case "+" -> (a + b);
       case "-" -> (a - b);

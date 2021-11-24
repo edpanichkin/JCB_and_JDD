@@ -16,15 +16,14 @@ public class DrawBox {
     this.symb = symb.charAt(0);
     this.text = spaceText(this.width);
 
-    
-    if((this.width < 0 || this.height < 0) || (corner.length() > 1 || symb.length() > 1)) {
+    if ((this.width < 0 || this.height < 0) || (corner.length() > 1 || symb.length() > 1)) {
       throw new IllegalArgumentException();
     }
   }
 
   public DrawBox(String text) {
     
-    this.width = Integer.parseInt(text) + 4;
+    this.width = text.length() + 4;
     this.height = 3;
     this.corner = '/';
     this.symb = '#';
@@ -33,7 +32,7 @@ public class DrawBox {
   
   public DrawBox(String symb, String text) {
     
-    this.width = Integer.parseInt(text) + 4;
+    this.width = text.length() + 4;
     this.height = 3;
     this.corner = symb.charAt(0);
     this.symb = symb.charAt(0);
@@ -46,7 +45,7 @@ public class DrawBox {
     } 
     drawFloor(corner, symb, width);
     if (height > 2) {
-      for (int i = 1; i<= height -2; i++) {
+      for (int i = 1; i <= height - 2; i++) {
         drawSpace(symb, width);
       }
     }
@@ -57,12 +56,8 @@ public class DrawBox {
 
   public static void drawTextBox() {
     drawUpTextFloor(corner, symb, width);
-    if (height > 2) {
-      System.out.print(symb + " " + text + symb +" /n");
-    }
-    if (height > 1) {
-      drawDownTextFloor(corner, symb, width);
-    }
+    System.out.print(symb + " " + text + " " + symb + "\n");
+    drawDownTextFloor(corner, symb, width);
   }
 
   public static void drawUpTextFloor(char corner, char floor, int width) {
@@ -70,11 +65,11 @@ public class DrawBox {
     for (int i = 1; i <= width - 2; i++) {
       System.out.print(floor);
     }
-    drawCorner((char) 134, 1);
+    drawCorner((char) 92, 1);
   }
 
   public static void drawDownTextFloor(char corner, char floor, int width) {
-    drawCorner((char) 134, -1);
+    drawCorner((char) 92, -1);
     for (int i = 1; i <= width - 2; i++) {
       System.out.print(floor);
     }
@@ -96,7 +91,7 @@ public class DrawBox {
     }
     if (pos == 1) {
       System.out.print(wall + "\n");
-    }
+    }    
   }
 
   public static void drawFloor(char corner, char floor, int width) {
@@ -128,19 +123,15 @@ public class DrawBox {
       return;
     }
     drawWall(wall, -1);
-//    for (int i = 1; i <= width - 2; i++) {      
-      System.out.print(text);
-//    }
-
+    System.out.print(" " + text + " ");
     drawWall(wall, 1);
   }
 
   public static String spaceText(int width) {
-    String txt = "" ;   
-    for(int i = 1; i < width - 2; i++) {
+    String txt = "";   
+    for (int i = 1; i <= width - 4; i++) {
       txt += " ";
     }
     return txt;
   }
 }
-
