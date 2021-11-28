@@ -1,4 +1,6 @@
-package academy.kovalevskyi.codingbootcamp.week2.day3.model;
+package academy.kovalevskyi.codingbootcamp.week2.day3.view;
+
+import academy.kovalevskyi.codingbootcamp.week2.day3.model.Player;
 
 public class Messages {
 
@@ -13,11 +15,19 @@ public class Messages {
   }
 
   public static void fieldNotEmpty() {
-    System.out.println("Поле занято, переходите\n\n");
+    String frame = "-";
+    frame = frame.repeat(27);
+    System.out.println(" " + frame);
+    System.out.println(" | Поле занято, переходите |");
+    System.out.println(" " + frame + "");
   }
 
   public static void wrongXY() {
-    System.out.println("Введите верные значения, x/y 0 1 2 \n\n");
+    String frame = "-";
+    frame = frame.repeat(38);
+    System.out.println(" " + frame);
+    System.out.println(" | Введите верные значения, x/y 0 1 2 |");
+    System.out.println(" " + frame + "");
   }
 
   public static void winMsg(Player player) { 

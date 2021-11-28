@@ -1,7 +1,7 @@
 package academy.kovalevskyi.codingbootcamp.week2.day3.controller;
 
 import academy.kovalevskyi.codingbootcamp.week2.day3.model.FieldPoints;
-import academy.kovalevskyi.codingbootcamp.week2.day3.model.Messages;
+import academy.kovalevskyi.codingbootcamp.week2.day3.view.Messages;
 import academy.kovalevskyi.codingbootcamp.week2.day3.model.Player;
 import academy.kovalevskyi.codingbootcamp.week2.day3.model.RulesCheck;
 import academy.kovalevskyi.codingbootcamp.week2.day3.view.TableView;
