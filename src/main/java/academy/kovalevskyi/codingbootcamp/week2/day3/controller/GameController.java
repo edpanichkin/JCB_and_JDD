@@ -62,16 +62,21 @@ public class GameController {
       if (!field.ifFieldBusy(x, y)) {
         table.putSymbol(x, y, sign);
         field.putPoint(x, y, sign);
+        TableView.clearScreen();
+        TableView.drawHeader();
       } else {
+        TableView.clearScreen();
         Messages.fieldNotEmpty();
         nextTurn();
       }
       if (RulesCheck.checkWin(field, field.signToIntFlag(sign))) {
-       Messages.winMsg(players.get(turnPointer));
+        Messages.winMsg(players.get(turnPointer));
+        printTable();
         inGame = !inGame;
         return;
       } else if (RulesCheck.checkDraw(field)) {
         Messages.drawMsg();
+        printTable();
         inGame = !inGame;
       }
     } else {
