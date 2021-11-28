@@ -81,7 +81,7 @@ public class GameController {
       }
     } else {
       TableView.clearScreen();
-      Messages.wrongXY();
+      Messages.wrongPoint();
       nextTurn();
     }
     nextTurn();

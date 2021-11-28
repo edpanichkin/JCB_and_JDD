@@ -22,7 +22,7 @@ public class Messages {
     System.out.println(" " + frame + "");
   }
 
-  public static void wrongXY() {
+  public static void wrongPoint() {
     String frame = "-";
     frame = frame.repeat(38);
     System.out.println(" " + frame);
