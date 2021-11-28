@@ -1,8 +1,8 @@
-package academy.kovalevskyi.codingbootcamp.week2.day3-4.view;
+package academy.kovalevskyi.codingbootcamp.week2.day3.view;
 
 public class TableView {
-  public final static char X_SIGN = 'x';
-  public final static char O_SIGN = 'o';
+  public static final char X_SIGN = 'x';
+  public static final char O_SIGN = 'o';
 
   char[][] table = {{'-', '>', ' ', '0', ' ', ' ', ' ', '1', ' ', ' ', ' ', '2', ' '},
                     {'0', ' ', ' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' '}, // 1,1  0,5  0,9
@@ -14,15 +14,14 @@ public class TableView {
   public TableView() {
   }
 
-   public void drawTableArray() {
-    //clearScreen();
+  public void drawTableArray() {
+  // clearScreen();
     for (int i = 0; i < table.length; i++) {
       for (int j = 0; j < table[i].length; j++) {
         System.out.print(table[i][j]);
       }
       System.out.println();
     }
-     //System.out.println("\n");
   }
 
   public void putSymbol(int x, int y, char sign) {
@@ -42,7 +41,6 @@ public class TableView {
   }
 
   public void clearScreen() {
-    //System.out.print("\r");
     System.out.print("\033[H\033[2J");
     System.out.flush();
   }

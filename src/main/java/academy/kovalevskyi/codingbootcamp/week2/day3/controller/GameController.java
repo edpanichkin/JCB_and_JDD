@@ -1,10 +1,9 @@
-package Controller;
+package academy.kovalevskyi.codingbootcamp.week2.day3.controller;
 
-import Model.FieldPoints;
-import Model.Player;
-import Model.RulesCheck;
-import View.TableView;
-
+import academy.kovalevskyi.codingbootcamp.week2.day3.model.FieldPoints;
+import academy.kovalevskyi.codingbootcamp.week2.day3.model.Player;
+import academy.kovalevskyi.codingbootcamp.week2.day3.model.RulesCheck;
+import academy.kovalevskyi.codingbootcamp.week2.day3.view.TableView;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -21,6 +20,7 @@ public class GameController {
     this.table = new TableView();
     this.field = new FieldPoints();
     this.players = new ArrayList<>();
+    TableView.clearScreen();
     System.out.println("Введите имена игроков через пробел");
     addPlayers(reader.nextLine().split(" "));
     whoStart();
@@ -32,32 +32,36 @@ public class GameController {
     players.add(new Player(names[1]));
   }
 
+  public void printTable() {
+    table.drawTableArray();
+  }
+
+  
   public void whoStart() {
     turnPointer = new Random().nextInt(new int[]{0, 1}.length);
     System.out.println("rand " + turnPointer);
     int a = 0;
     int b = 0;
-    switch(turnPointer) {
-      case 0 -> a = 1;
-      case 1 -> b = 1;
+    switch (turnPointer) {
+      case 0 -> b = 1;
+      case 1 -> a = 1;
+      default -> throw new IllegalArgumentException();
     }
-      players.get(a).setTeam(TableView.X_SIGN);
-      players.get(b).setTeam(TableView.O_SIGN);
-  }
-
-  public void printTable() {
-    table.drawTableArray();
-  }
+    players.get(a).setTeam(TableView.X_SIGN);
+    players.get(b).setTeam(TableView.O_SIGN);
+  } 
 
   public void checkAndMove() {
     String playerName = players.get(turnPointer).getName();
     char sign = players.get(turnPointer).getTeam();
     System.out.printf("%s ВАШ ХОД! Вы ходите за '%s'. Введите координаты для хода:\n", playerName, sign);
-    String[] inputData = reader.nextLine().split(" ");
-    int x = Integer.parseInt(inputData[0]);
-    int y = Integer.parseInt(inputData[1]);
-    if (x >= 0 && x < 3 && y >= 0 && y < 3) {
-      if (!field.ifFieldBusy(x,y)) {
+    String[] inputData = reader.nextLine().split("\s+");
+    if (inputData.length == 2 && (inputData[0].length() == 1 && inputData[1].length() == 1)
+            && (inputData[0].charAt(0) >= 48 && inputData[0].charAt(0) <= 50)
+            && inputData[1].charAt(0) >= 48 && inputData[1].charAt(0) <= 50) {
+      int x = Integer.parseInt(inputData[0]);
+      int y = Integer.parseInt(inputData[1]);
+      if (!field.ifFieldBusy(x, y)) {
         table.putSymbol(x, y, sign);
         field.putPoint(x, y, sign);
       } else {
@@ -74,6 +78,7 @@ public class GameController {
         inGame = !inGame;
       }
     } else {
+      TableView.clearScreen();
       System.out.println("Введите верные значения, x/y 0 1 2 \n");
       nextTurn();
     }

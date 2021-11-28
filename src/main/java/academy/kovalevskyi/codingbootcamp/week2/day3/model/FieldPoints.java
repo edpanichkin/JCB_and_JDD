@@ -1,10 +1,10 @@
-package academy.kovalevskyi.codingbootcamp.week2.day3-4.model;
+package academy.kovalevskyi.codingbootcamp.week2.day3.model;
 
-import academy.kovalevskyi.codingbootcamp.week2.day3-4.view.TableView;
+import academy.kovalevskyi.codingbootcamp.week2.day3.view.TableView;
 
 public class FieldPoints {
 
-  public int[][] intTable = {{1,0,0}, {1,0,0}, {0,0,0}};
+  public int[][] intTable = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
   public int getElementInIntTable(int x, int y) {
     return intTable[y][x];
@@ -19,7 +19,8 @@ public class FieldPoints {
       };
     }
   }
-  public int signToIntFlag(char sign){
+
+  public int signToIntFlag(char sign) {
     return switch (sign) {
       case TableView.X_SIGN -> 1;
       case TableView.O_SIGN -> -1;
@@ -29,5 +30,5 @@ public class FieldPoints {
 
   public boolean ifFieldBusy(int x, int y) {
     return (intTable[y][x] == -1 || intTable[y][x] == 1);
-  }
+  } 
 }

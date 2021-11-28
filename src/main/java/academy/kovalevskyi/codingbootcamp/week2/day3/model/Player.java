@@ -1,4 +1,4 @@
-package academy.kovalevskyi.codingbootcamp.week2.day3-4.model;
+package academy.kovalevskyi.codingbootcamp.week2.day3.model;
 
 public class Player {
 
@@ -14,7 +14,6 @@ public class Player {
   }
 
   public char getTeam() {
-    System.out.println(team);
     return team;
   }
 
