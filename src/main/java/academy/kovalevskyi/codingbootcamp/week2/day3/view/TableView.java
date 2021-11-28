@@ -15,10 +15,9 @@ public class TableView {
   }
 
   public void drawTableArray() {
-  // clearScreen();
-    for (int i = 0; i < table.length; i++) {
-      for (int j = 0; j < table[i].length; j++) {
-        System.out.print(table[i][j]);
+    for (char[] chars : table) {
+      for (int j = 0; j < chars.length; j++) {
+        System.out.print(chars[j]);
       }
       System.out.println();
     }
@@ -40,7 +39,7 @@ public class TableView {
     table[puY][puX] = sign;
   }
 
-  public void clearScreen() {
+  public static void clearScreen() {
     System.out.print("\033[H\033[2J");
     System.out.flush();
   }

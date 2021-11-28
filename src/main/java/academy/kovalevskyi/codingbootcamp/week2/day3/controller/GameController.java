@@ -1,6 +1,7 @@
 package academy.kovalevskyi.codingbootcamp.week2.day3.controller;
 
 import academy.kovalevskyi.codingbootcamp.week2.day3.model.FieldPoints;
+import academy.kovalevskyi.codingbootcamp.week2.day3.model.Messages;
 import academy.kovalevskyi.codingbootcamp.week2.day3.model.Player;
 import academy.kovalevskyi.codingbootcamp.week2.day3.model.RulesCheck;
 import academy.kovalevskyi.codingbootcamp.week2.day3.view.TableView;
@@ -21,7 +22,7 @@ public class GameController {
     this.field = new FieldPoints();
     this.players = new ArrayList<>();
     TableView.clearScreen();
-    System.out.println("Введите имена игроков через пробел");
+    Messages.startMsg();
     addPlayers(reader.nextLine().split(" "));
     whoStart();
     printTable();
@@ -36,10 +37,8 @@ public class GameController {
     table.drawTableArray();
   }
 
-  
   public void whoStart() {
     turnPointer = new Random().nextInt(new int[]{0, 1}.length);
-    System.out.println("rand " + turnPointer);
     int a = 0;
     int b = 0;
     switch (turnPointer) {
@@ -52,9 +51,8 @@ public class GameController {
   } 
 
   public void checkAndMove() {
-    String playerName = players.get(turnPointer).getName();
     char sign = players.get(turnPointer).getTeam();
-    System.out.printf("%s ВАШ ХОД! Вы ходите за '%s'. Введите координаты для хода:\n", playerName, sign);
+    Messages.playerMove(players.get(turnPointer));
     String[] inputData = reader.nextLine().split("\s+");
     if (inputData.length == 2 && (inputData[0].length() == 1 && inputData[1].length() == 1)
             && (inputData[0].charAt(0) >= 48 && inputData[0].charAt(0) <= 50)
@@ -65,21 +63,20 @@ public class GameController {
         table.putSymbol(x, y, sign);
         field.putPoint(x, y, sign);
       } else {
-        System.out.println("Поле занято, переходите");
+        Messages.fieldNotEmpty();
         nextTurn();
       }
-
       if (RulesCheck.checkWin(field, field.signToIntFlag(sign))) {
-        System.out.printf("Игрок %s выйграл! Поздравляю, хорошая партия! \n", playerName);
+       Messages.winMsg(players.get(turnPointer));
         inGame = !inGame;
         return;
       } else if (RulesCheck.checkDraw(field)) {
-        System.out.println("НИЧЬЯ!!\n");
+        Messages.drawMsg();
         inGame = !inGame;
       }
     } else {
       TableView.clearScreen();
-      System.out.println("Введите верные значения, x/y 0 1 2 \n");
+      Messages.wrongXY();
       nextTurn();
     }
     nextTurn();

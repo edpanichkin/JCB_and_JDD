@@ -1,4 +1,4 @@
-
+*.iml
 *.class
 *.jar
 !*.java
@@ -7,3 +7,4 @@
 !.gitignore
 !src/**
 target/**
+.idea/**
