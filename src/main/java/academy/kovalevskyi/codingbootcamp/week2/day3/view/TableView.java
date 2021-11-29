@@ -47,6 +47,6 @@ public class TableView {
   }
   
   public static void drawHeader() {
-    System.out.println("\n\n");
+    System.out.println("\n  Играем \n");
   }
 }

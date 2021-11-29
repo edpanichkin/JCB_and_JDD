@@ -8,11 +8,13 @@ public class Main {
   public static int[] times;
   public static int partsDone;
   public static double averageTime;
+  public static int maxTime;
   public static int percentDone;
   public static long start;
   public static int eta;
 
   public static void main(String[] args) throws InterruptedException {
+    if(args[0])
     parts = Integer.parseInt(args[0]);
     times = new int[args.length - 1];
     for (int i = 0; i < args.length - 1; i++) {
@@ -20,16 +22,18 @@ public class Main {
     }
     partsDone = 0;
     averageTime = Arrays.stream(times).average().getAsDouble();
-    eta = (int) averageTime * parts;
+    maxTime = Arrays.stream(times).max().getAsInt();
+    eta = (int) (maxTime * parts * 0.8);
     printTaskProgress();
     start = System.currentTimeMillis();
     while(partsDone < parts) {
       partsDone++;
-      Thread.sleep(1000L * randomTimeFromArgs());
+      Thread.sleep(1000 * randomTimeFromArgs());
       printTaskProgress();
     }
     printTaskProgress();
-  }
+    System.out.println("\n");  
+}
 
   public static void printTaskProgress() {
     percentDone = (partsDone * 100) / parts;
@@ -73,7 +77,9 @@ public class Main {
   public static String estimatedTime() {
     long current = System.currentTimeMillis();
     int deltaTime = (int) (current - start)/1000;
-    eta = percentDone < 90 ? (eta - deltaTime) : (parts - partsDone) > 0 ? (1 + eta - eta / (parts - partsDone)) : 0;
+    if (percentDone != 0) {    
+      eta = percentDone < 70 ? (eta - deltaTime) : (parts - partsDone) > 0 ? (1 + eta - eta / (parts - partsDone)) : 0;
+    }
     start = current;
     int hours = eta / 3600;
     int minutes = (eta % 3600) / 60;

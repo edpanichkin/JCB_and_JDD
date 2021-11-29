@@ -70,13 +70,13 @@ public class GameController {
         nextTurn();
       }
       if (RulesCheck.checkWin(field, field.signToIntFlag(sign))) {
-        Messages.winMsg(players.get(turnPointer));
         printTable();
+        Messages.winMsg(players.get(turnPointer));
         inGame = !inGame;
         return;
       } else if (RulesCheck.checkDraw(field)) {
-        Messages.drawMsg();
         printTable();
+        Messages.drawMsg();
         inGame = !inGame;
       }
     } else {
