@@ -14,7 +14,10 @@ public class Main {
   public static int eta;
 
   public static void main(String[] args) throws InterruptedException {
-    if(args[0])
+    if(!checkArgs(args)) {
+      System.out.println("Введите верные значения");
+      return;
+    }
     parts = Integer.parseInt(args[0]);
     times = new int[args.length - 1];
     for (int i = 0; i < args.length - 1; i++) {
@@ -34,6 +37,16 @@ public class Main {
     printTaskProgress();
     System.out.println("\n");  
 }
+  public static boolean checkArgs(String[] args) {
+    for (String arg : args) {
+      for (int i = 0; i < arg.length(); i++) {
+        if (arg.charAt(i) < 48 || arg.charAt(i) > 58) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
   public static void printTaskProgress() {
     percentDone = (partsDone * 100) / parts;
