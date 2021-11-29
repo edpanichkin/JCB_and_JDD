@@ -8,9 +8,10 @@ public class Main {
   public static int[] times;
   public static int partsDone;
   public static double averageTime;
-  public static int maxTime;
   public static int percentDone;
-  public static long start; 
+  public static long start;
+  public static int eta;
+
   public static void main(String[] args) throws InterruptedException {
     parts = Integer.parseInt(args[0]);
     times = new int[args.length - 1];
@@ -19,23 +20,22 @@ public class Main {
     }
     partsDone = 0;
     averageTime = Arrays.stream(times).average().getAsDouble();
-    maxTime = Arrays.stream(times).max().getAsInt();
-    start = System.currentTimeMillis();
+    eta = (int) averageTime * parts;
     printTaskProgress();
+    start = System.currentTimeMillis();
     while(partsDone < parts) {
       partsDone++;
-      Thread.sleep(1000 * randomTimeFromArgs());
+      Thread.sleep(1000L * randomTimeFromArgs());
       printTaskProgress();
     }
     printTaskProgress();
-    System.out.println("\n\n");
   }
 
   public static void printTaskProgress() {
     percentDone = (partsDone * 100) / parts;
-    cls();
+    clearString();
     System.out.print(percentageString()
-            + progressLine() + status() + estimatedTime());
+            + progressLine() + forPrintPartsDone() + estimatedTime());
   }
 
   public static String progressLine() {
@@ -61,7 +61,7 @@ public class Main {
     return progLine;
   }
 
-  public static String status() {
+  public static String forPrintPartsDone() {
     return parts > 9 ? (partsDone < 10 ? (" " + partsDone + " / " + parts + " ") : (partsDone + " / " + parts + " "))
             : (partsDone + " / " + parts + " ");
   }
@@ -73,12 +73,11 @@ public class Main {
   public static String estimatedTime() {
     long current = System.currentTimeMillis();
     int deltaTime = (int) (current - start)/1000;
-    int eta = (int) (averageTime * (parts - partsDone) - deltaTime) <= 0 ? 0 : (int) (averageTime * parts - deltaTime);    
-    eta = eta > (int) averageTime * (parts - partsDone) && percentDone > 80 ? (int) averageTime * (parts - partsDone) : eta;
+    eta = percentDone < 90 ? (eta - deltaTime) : (parts - partsDone) > 0 ? (1 + eta - eta / (parts - partsDone)) : 0;
+    start = current;
     int hours = eta / 3600;
     int minutes = (eta % 3600) / 60;
     int seconds = eta % 60;
-//    System.out.print(minutes + " - m - " + seconds + "s " + eta + "delta "+ deltaTime); 
     return String.format("ETA: %02d:%02d:%02d", hours, minutes, seconds);
   }
 
@@ -88,7 +87,7 @@ public class Main {
             (percentDone < 100 ? " " + percentDone + "% " : percentDone + "% ");
   }
 
-  public static void cls() {
+  public static void clearString() {
    System.out.print("\r");
   }
 }
