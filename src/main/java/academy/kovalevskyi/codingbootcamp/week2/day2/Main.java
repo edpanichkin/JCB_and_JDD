@@ -14,14 +14,14 @@ public class Main {
   public static int eta;
 
   public static void main(String[] args) throws InterruptedException {
-    if(!checkArgs(args)) {
+    if (!checkArgs(args)) {
       System.out.println("Введите верные значения");
       return;
     }
     parts = Integer.parseInt(args[0]);
     times = new int[args.length - 1];
     for (int i = 0; i < args.length - 1; i++) {
-      times[i] = Integer.parseInt(args[i+1]);
+      times[i] = Integer.parseInt(args[i + 1]);
     }
     partsDone = 0;
     averageTime = Arrays.stream(times).average().getAsDouble();
@@ -29,14 +29,15 @@ public class Main {
     eta = (int) (maxTime * parts * 0.8);
     printTaskProgress();
     start = System.currentTimeMillis();
-    while(partsDone < parts) {
+    while (partsDone < parts) {
       partsDone++;
       Thread.sleep(1000 * randomTimeFromArgs());
       printTaskProgress();
     }
     printTaskProgress();
     System.out.println("\n");  
-}
+  }
+  
   public static boolean checkArgs(String[] args) {
     for (String arg : args) {
       for (int i = 0; i < arg.length(); i++) {
@@ -79,8 +80,8 @@ public class Main {
   }
 
   public static String forPrintPartsDone() {
-    return parts > 9 ? (partsDone < 10 ? (" " + partsDone + " / " + parts + " ") : (partsDone + " / " + parts + " "))
-            : (partsDone + " / " + parts + " ");
+    return parts > 9 ? (partsDone < 10 ? (" " + partsDone + " / " + parts + " ") :
+       (partsDone + " / " + parts + " ")) : (partsDone + " / " + parts + " ");
   }
 
   public static int randomTimeFromArgs() {
@@ -89,9 +90,10 @@ public class Main {
 
   public static String estimatedTime() {
     long current = System.currentTimeMillis();
-    int deltaTime = (int) (current - start)/1000;
+    int deltaTime = (int) (current - start) / 1000;
     if (percentDone != 0) {    
-      eta = percentDone < 70 ? (eta - deltaTime) : (parts - partsDone) > 0 ? (1 + eta - eta / (parts - partsDone)) : 0;
+      eta = percentDone < 70 ? (eta - deltaTime) : 
+        (parts - partsDone) > 0 ? (1 + eta - eta / (parts - partsDone)) : 0;
     }
     start = current;
     int hours = eta / 3600;
@@ -107,6 +109,6 @@ public class Main {
   }
 
   public static void clearString() {
-   System.out.print("\r");
+    System.out.print("\r");
   }
 }
