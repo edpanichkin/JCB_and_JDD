@@ -8,3 +8,5 @@
 !src/**
 target/**
 .idea/**
+/src/main/java/academy/kovalevskyi/javadeepdive/week0/day0/.idea/
+/src/main/java/academy/kovalevskyi/javadeepdive/week0/day0/StdBufferReader.iml

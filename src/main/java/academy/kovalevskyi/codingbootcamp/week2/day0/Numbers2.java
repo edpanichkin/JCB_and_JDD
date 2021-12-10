@@ -3,24 +3,22 @@ package academy.kovalevskyi.codingbootcamp.week2.day0;
 import academy.kovalevskyi.codingbootcamp.week0.day4.Numbers1;
 import academy.kovalevskyi.codingbootcamp.week1.day0.NumberUtils;
 
+import java.util.Arrays;
+
 public class Numbers2 extends Numbers1 {
   public static char[][] generateTriplets() {
-    // n элементы  Cmn = n! / (n-m)!* m!
+    // n элементы  Ckn = n! / (n-k)! * k!
     int n = 10;
-    int m = 3;
+    int k = 3;
     char[][] charArr = new char[120][3];
-    fillByZero(charArr);
-    int count = 12;
-    for (int i = 0; i < charArr.length; i++) {
-      char[] buf =  fillRowsByUniqueDigits(charArr[i], count);
-      if (buf.length != 0) {
-        System.out.print(" IN OK  ");
-        System.out.print(buf);
-        System.out.println("");
-        charArr[i] = buf;
-      }     
-      count++;
+    int[] comb = new int[k + 2];
+    for (int i = 0; i < k; i++) {
+      comb[i] = i;
     }
+    comb[k] = n;
+    comb[k + 1] = 0;
+
+
     return charArr;
   }
 
