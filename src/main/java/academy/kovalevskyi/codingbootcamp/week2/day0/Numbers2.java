@@ -3,23 +3,10 @@ package academy.kovalevskyi.codingbootcamp.week2.day0;
 import academy.kovalevskyi.codingbootcamp.week0.day4.Numbers1;
 import academy.kovalevskyi.codingbootcamp.week1.day0.NumberUtils;
 
-import java.util.Arrays;
-
 public class Numbers2 extends Numbers1 {
   public static char[][] generateTriplets() {
-    // n элементы  Ckn = n! / (n-k)! * k!
-    int n = 10;
-    int k = 3;
-    char[][] charArr = new char[120][3];
-    int[] comb = new int[k + 2];
-    for (int i = 0; i < k; i++) {
-      comb[i] = i;
-    }
-    comb[k] = n;
-    comb[k + 1] = 0;
 
-
-    return charArr;
+    return null;
   }
 
   public static char[][] generateTuples() {
