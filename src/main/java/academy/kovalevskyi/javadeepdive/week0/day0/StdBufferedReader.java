@@ -1,10 +1,12 @@
 package academy.kovalevskyi.javadeepdive.week0.day0;
 
-import java.io.Closeable;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
+import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class StdBufferedReader implements Closeable {
+
   private static final int TRANSFER_BUFFER_SIZE = 8192;
   Reader reader;
   public static final char[] NEW_LINE = new char[]{};
@@ -12,8 +14,6 @@ public class StdBufferedReader implements Closeable {
   int charCount = 0;
   int buffReadCounter = 0;
   int bufferSize;
-  //int fromPastLength;
-  int lineOutPutCount = 0;
   boolean endByNewline = false;
   boolean eof = false;
 
@@ -47,7 +47,7 @@ public class StdBufferedReader implements Closeable {
         return null;
       }
       buffCache = testForNewLine(buffCache);
-      lineOutPutCount++;
+      // lineOutPutCount++;
       return buffCache;
     }
     if (endByNewline) {
@@ -163,5 +163,38 @@ public class StdBufferedReader implements Closeable {
   public static char[] arrayRemoveCharAtIndex(char[] sourceToChange, int index) {
     return arrayCopyAndExtend(arrayNewLengthReduceRight(sourceToChange, index),
             arrayReduceLeftToIndex(sourceToChange, index));
+  }
+
+  public Stream<String> lines() {
+    Iterator<String> iter = new Iterator<>() {
+      String nextLine = null;
+
+      @Override
+      public boolean hasNext() {
+        if (nextLine != null) {
+          return true;
+        } else {
+          try {
+            nextLine = Arrays.toString(readLine());
+            return (nextLine != null);
+          } catch (IOException e) {
+            throw new UncheckedIOException(e);
+          }
+        }
+      }
+
+      @Override
+      public String next() {
+        if (nextLine != null || hasNext()) {
+          String line = nextLine;
+          nextLine = null;
+          return line;
+        } else {
+          throw new NoSuchElementException();
+        }
+      }
+    };
+    return StreamSupport.stream(Spliterators.spliteratorUnknownSize(
+            iter, Spliterator.ORDERED | Spliterator.NONNULL), false);
   }
 }

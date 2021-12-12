@@ -16,14 +16,29 @@ public record Csv(String[] headers, String[][] values) {
     if (o == null) {
       return false;
     }
-    if (getClass() != o.getClass()) { // remember about parent
+    if (getClass() != o.getClass()) {
       return false;
     }
     Csv that = (Csv) o;
     if (withHeader() && !Arrays.equals(this.headers, that.headers)) {
       return false;
     }
-    return Arrays.equals(this.values, that.values);
+    return Arrays.deepEquals(this.values, that.values);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = Arrays.hashCode(headers);
+    result = 31 * result + Arrays.hashCode(values);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "Csv{" +
+            "headers=" + Arrays.toString(headers) +
+            ", values=" + Arrays.toString(values) +
+            '}';
   }
 
   public static class Builder {
@@ -37,7 +52,7 @@ public record Csv(String[] headers, String[][] values) {
 
     public Builder values(String[][] values) {
       for (String[] value : values) {
-        if (values[0].length != value.length) {
+        if (values[0].length != value.length && value.length != 0) {
           throw new InvalidCsvLineLengthException();
         }
         if (build().withHeader() && header.length != value.length) {
@@ -49,7 +64,7 @@ public record Csv(String[] headers, String[][] values) {
     }
 
     public Csv build() {
-      return new Csv(this.header, this.values);
+      return new Csv(header, values);
     }
   }
 }

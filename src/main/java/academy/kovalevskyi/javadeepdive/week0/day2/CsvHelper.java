@@ -22,9 +22,12 @@ public class CsvHelper {
       String[] headers = data[0];
       String[][] values = new String[data.length - 1][];
       System.arraycopy(data, 1, values, 0, data.length - 1);
-      return new Csv(headers, values);
+      return new Csv.Builder()
+              .header(headers)
+              .values(values)
+              .build();
     }
-    return new Csv(null, data);
+    return new Csv.Builder().build();
   }
 
   public static void writeCsvTo(Writer writer, Csv csv, char delimiter) throws IOException {
