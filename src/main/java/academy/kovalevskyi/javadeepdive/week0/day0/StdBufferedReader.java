@@ -1,7 +1,15 @@
 package academy.kovalevskyi.javadeepdive.week0.day0;
 
-import java.io.*;
-import java.util.*;
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.UncheckedIOException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -175,7 +183,13 @@ public class StdBufferedReader implements Closeable {
           return true;
         } else {
           try {
-            nextLine = Arrays.toString(readLine());
+            var charsArr = readLine();
+            if (charsArr != null) {
+              nextLine = IntStream.range(0, charsArr.length)
+                  .mapToObj(i -> charsArr[i])
+                  .map(String::valueOf)
+                  .collect(Collectors.joining());
+            }
             return (nextLine != null);
           } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -195,6 +209,6 @@ public class StdBufferedReader implements Closeable {
       }
     };
     return StreamSupport.stream(Spliterators.spliteratorUnknownSize(
-            iter, Spliterator.ORDERED | Spliterator.NONNULL), false);
+        iter, Spliterator.ORDERED | Spliterator.NONNULL), false);
   }
 }

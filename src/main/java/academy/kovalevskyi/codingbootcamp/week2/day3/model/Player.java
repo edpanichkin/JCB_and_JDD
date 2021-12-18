@@ -2,7 +2,7 @@ package academy.kovalevskyi.codingbootcamp.week2.day3.model;
 
 public class Player {
 
-  private String name;
+  private final String name;
   private char team;
 
   public Player(String name) {

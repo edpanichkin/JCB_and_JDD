@@ -1,7 +1,6 @@
 package academy.kovalevskyi.javadeepdive.week0.day3;
 
 import academy.kovalevskyi.javadeepdive.week0.day2.Csv;
-
 import java.util.ArrayList;
 
 public class UpdateRequest extends AbstractRequest<Csv> {
@@ -29,8 +28,8 @@ public class UpdateRequest extends AbstractRequest<Csv> {
         counter++;
       }
     }
-    return new Csv.Builder().
-            header(csv.headers())
+    return new Csv.Builder()
+            .header(csv.headers())
             .values(newValue)
             .build();
   }

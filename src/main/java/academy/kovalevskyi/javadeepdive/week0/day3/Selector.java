@@ -2,21 +2,23 @@ package academy.kovalevskyi.javadeepdive.week0.day3;
 
 public record Selector(String fieldName, String value) {
 
-    public static class Builder {
-        String fieldName;
-        String value;
-        public Builder fieldName(String fieldName) {
-            this.fieldName = fieldName;
-            return this;
-        }
+  public static class Builder {
 
-        public Builder value(String value) {
-            this.value = value;
-            return this;
-        }
+    String fieldName;
+    String value;
 
-        public Selector build() {
-            return new Selector(this.fieldName, this.value);
-        }
+    public Builder fieldName(String fieldName) {
+      this.fieldName = fieldName;
+      return this;
     }
+
+    public Builder value(String value) {
+      this.value = value;
+      return this;
+    }
+
+    public Selector build() {
+      return new Selector(this.fieldName, this.value);
+    }
+  }
 }

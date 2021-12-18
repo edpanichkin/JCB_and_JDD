@@ -1,7 +1,5 @@
 package academy.kovalevskyi.codingbootcamp.week2.day1;
 
-import academy.kovalevskyi.codingbootcamp.week1.day2.StringUtils;
-
 public class TextPrinter2 {
     
   public static void main(String... args) {

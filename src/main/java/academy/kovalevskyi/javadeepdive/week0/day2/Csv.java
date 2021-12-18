@@ -33,15 +33,8 @@ public record Csv(String[] headers, String[][] values) {
     return result;
   }
 
-  @Override
-  public String toString() {
-    return "Csv{" +
-            "headers=" + Arrays.toString(headers) +
-            ", values=" + Arrays.toString(values) +
-            '}';
-  }
-
   public static class Builder {
+
     public String[] header;
     public String[][] values;
 
