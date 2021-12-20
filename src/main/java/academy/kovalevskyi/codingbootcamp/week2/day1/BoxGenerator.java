@@ -10,6 +10,6 @@ public class BoxGenerator {
       return;
     }
     DrawBox box = new DrawBox(args[0], args[1], args[2], args[3]);
-    box.drawBox(); 
+    DrawBox.drawBox();
   }
 }

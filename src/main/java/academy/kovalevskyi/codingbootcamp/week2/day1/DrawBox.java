@@ -10,33 +10,33 @@ public class DrawBox {
 
   public DrawBox(String width, String height, String symb, String corner) {
     
-    this.width = Integer.parseInt(width);
-    this.height = Integer.parseInt(height);
-    this.corner = corner.charAt(0);
-    this.symb = symb.charAt(0);
-    this.text = spaceText(this.width);
+    DrawBox.width = Integer.parseInt(width);
+    DrawBox.height = Integer.parseInt(height);
+    DrawBox.corner = corner.charAt(0);
+    DrawBox.symb = symb.charAt(0);
+    text = spaceText(DrawBox.width);
 
-    if ((this.width < 0 || this.height < 0) || (corner.length() > 1 || symb.length() > 1)) {
+    if ((DrawBox.width < 0 || DrawBox.height < 0) || (corner.length() > 1 || symb.length() > 1)) {
       throw new IllegalArgumentException();
     }
   }
 
   public DrawBox(String text) {
     
-    this.width = text.length() + 4;
-    this.height = 3;
-    this.corner = '/';
-    this.symb = '#';
-    this.text = text;
+    width = text.length() + 4;
+    height = 3;
+    corner = '/';
+    symb = '#';
+    DrawBox.text = text;
   }
   
   public DrawBox(String symb, String text) {
     
-    this.width = text.length() + 4;
-    this.height = 3;
-    this.corner = symb.charAt(0);
-    this.symb = symb.charAt(0);
-    this.text = text;
+    width = text.length() + 4;
+    height = 3;
+    corner = symb.charAt(0);
+    DrawBox.symb = symb.charAt(0);
+    DrawBox.text = text;
   }
   
   public static void drawBox() {

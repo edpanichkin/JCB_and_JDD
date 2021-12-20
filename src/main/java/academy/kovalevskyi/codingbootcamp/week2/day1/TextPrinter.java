@@ -11,6 +11,6 @@ public class TextPrinter {
       return;
     }
     DrawBox box = new DrawBox(args[0]);
-    box.drawTextBox(); 
+    DrawBox.drawTextBox();
   }
 }

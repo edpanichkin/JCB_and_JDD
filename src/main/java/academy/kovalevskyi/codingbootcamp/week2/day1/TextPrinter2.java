@@ -10,6 +10,6 @@ public class TextPrinter2 {
       return;
     }
     DrawBox box = new DrawBox(args[0], args[1]);
-    box.drawBox(); 
+    DrawBox.drawBox();
   }
 }
