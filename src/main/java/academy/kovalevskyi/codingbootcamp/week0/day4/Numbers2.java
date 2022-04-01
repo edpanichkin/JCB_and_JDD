@@ -60,9 +60,7 @@ public class Numbers2 {
   private static char[] addMinusToCharArr(char[] charArr) {
     char[] minusCharArr = new char[charArr.length + 1];
     minusCharArr[0] = (char) 45;
-    for (int i = 0; i < charArr.length; i++) {
-      minusCharArr[i + 1] = charArr[i];
-    }
+    System.arraycopy(charArr, 0, minusCharArr, 1, charArr.length);
     return minusCharArr;
   }
 

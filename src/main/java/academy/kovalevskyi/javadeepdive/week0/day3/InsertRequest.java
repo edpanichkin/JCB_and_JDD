@@ -6,12 +6,12 @@ public class InsertRequest extends AbstractRequest<Csv> {
 
   String[] line;
 
-  private InsertRequest(Csv target, String[] line) {
+  public InsertRequest(Csv target, String[] line) {
     super(target);
     this.line = line;
   }
 
-  protected Csv execute() throws RequestException {
+  public Csv execute() throws RequestException {
     if (this.csv.headers() == null) {
       throw new RequestException();
     }

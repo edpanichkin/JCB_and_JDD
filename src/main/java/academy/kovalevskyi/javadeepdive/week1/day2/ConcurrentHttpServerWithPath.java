@@ -11,16 +11,17 @@ import java.util.concurrent.Executors;
 
 public class ConcurrentHttpServerWithPath extends Thread {
 
+  public boolean live = true;
   public ServerSocket serverSocket;
   public ExecutorService executorService = Executors.newFixedThreadPool(10);
-  public final CopyOnWriteArrayList<HttpRequestsHandler> handlers = new CopyOnWriteArrayList<>();
+  public CopyOnWriteArrayList<HttpRequestsHandler> handlers = new CopyOnWriteArrayList<>();
 
 
   public ConcurrentHttpServerWithPath() {
     try {
       this.serverSocket = new ServerSocket(8080);
     } catch (IOException e) {
-      e.printStackTrace();
+      //e.printStackTrace();
     }
   }
 
@@ -46,11 +47,13 @@ public class ConcurrentHttpServerWithPath extends Thread {
   }
 
   public void stopServer() {
+    live = false;
+
     try {
-      executorService.shutdownNow();
       serverSocket.close();
+      executorService.shutdown();
     } catch (IOException e) {
-      e.printStackTrace();
+      //e.printStackTrace();
     }
   }
 
@@ -60,15 +63,17 @@ public class ConcurrentHttpServerWithPath extends Thread {
       try {
         Socket socket = serverSocket.accept();
         executorService.execute(() -> new HttpRequestToResponse(socket, handlers).executeRequest());
+
       } catch (SocketException ignored) {
         System.out.println("ALL CONNECTIONS CLOSED");
       } catch (IOException e) {
-        e.printStackTrace();
+        // e.printStackTrace();
       }
     }
   }
 
   public boolean isLive() {
-    return !serverSocket.isClosed();
+    return live;
+    //   return !serverSocket.isClosed();
   }
 }

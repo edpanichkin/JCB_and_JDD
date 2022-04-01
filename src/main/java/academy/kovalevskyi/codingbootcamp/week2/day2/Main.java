@@ -31,7 +31,7 @@ public class Main {
     start = System.currentTimeMillis();
     while (partsDone < parts) {
       partsDone++;
-      Thread.sleep(1000 * randomTimeFromArgs());
+      Thread.sleep(1000L * randomTimeFromArgs());
       printTaskProgress();
     }
     printTaskProgress();

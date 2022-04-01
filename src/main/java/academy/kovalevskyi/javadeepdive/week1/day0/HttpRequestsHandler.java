@@ -47,7 +47,7 @@ public class HttpRequestsHandler {
 
   public void parseAndPrintRequest() throws IOException {
     this.in = new StdBufferedReader(new InputStreamReader(socket.getInputStream()));
-    var list = in.lines().toArray(String[]::new);
+    var list = new String[]{};//in.lines().toArray(String[]::new);
     int i = 0;
     var host = "";
     while ((list[++i]).contains("Host: ")) {

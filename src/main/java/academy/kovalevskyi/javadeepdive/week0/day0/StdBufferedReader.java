@@ -55,7 +55,6 @@ public class StdBufferedReader implements Closeable {
         return null;
       }
       buffCache = testForNewLine(buffCache);
-      // lineOutPutCount++;
       return buffCache;
     }
     if (endByNewline) {

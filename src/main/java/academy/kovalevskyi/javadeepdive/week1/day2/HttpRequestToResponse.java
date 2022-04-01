@@ -7,61 +7,86 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class HttpRequestToResponse {
 
-  Socket socket;
+  public Socket socket;
   OutputStream out;
   StdBufferedReader in;
-  private final List<HttpRequestsHandler> list;
+  public CopyOnWriteArrayList<HttpRequestsHandler> list = new CopyOnWriteArrayList<>();
   private HttpRequest request;
-  HttpResponse httpResponse;
+  public HttpResponse httpResponse;
 
-  public HttpRequestToResponse(Socket socket, List<HttpRequestsHandler> list) {
+  public HttpRequestToResponse(Socket socket, CopyOnWriteArrayList<HttpRequestsHandler> list) {
     this.socket = socket;
-    this.list = list;
     this.list.add(error404);
-    this.list.add(helloHandler);
+    if (list != null) {
+      this.list.addAll(list);
+    }
   }
 
-  HttpRequestsHandler helloHandler = new HttpRequestsHandler() {
-    final String htmlBody = "<h1>hi</h1>";
-
-    @Override
-    public String path() {
-      return "/hello";
+  public void executeRequest() {
+    parseRequest();
+    searchHandler();
+    try {
+      out.write(httpResponse.toString().getBytes());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        socket.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
+  }
 
-    @Override
-    public HttpMethod method() {
-      return HttpMethod.GET;
+  public void parseRequest() {
+    try {
+      this.out = socket.getOutputStream();
+      this.in = new StdBufferedReader(new InputStreamReader(socket.getInputStream()));
+      var firstHeaders = new String(in.readLine()).split(" ");
+      ArrayList<String> list = new ArrayList<>();
+      while (in.hasNext()) {
+        list.add(new String(in.readLine()));
+      }
+      var body = "";
+      var contLenStr = list.get(0).split(":");
+      if (contLenStr[0].equals("Content-Length")) {
+        for (String l : list) {
+          if (l.length() == Integer.parseInt(contLenStr[1].strip())) {
+            body = l;
+            System.out.println("IN BODY PARSING" + l);
+          }
+        }
+      }
+      request = new Builder()
+          .method(HttpMethod.valueOf(firstHeaders[0]))
+          .body(body)
+          .path(firstHeaders[1])
+          .build();
+      System.out.println("PATH: " + request.path() + " METHOD: " + request.httpMethod() + "\nBODY "
+          + request.body());
+
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    @Override
-    public HttpResponse process(HttpRequest request) {
-      return new HttpResponse.Builder().status(ResponseStatus.OK_200).body(htmlBody).build();
+  public void searchHandler() {
+    for (HttpRequestsHandler item : this.list) {
+      if (item.path().equals(request.path()) && item.method().equals(request.httpMethod())) {
+        System.out.println(item.path() + " " + request.path());
+        httpResponse = item.process(request);
+        break;
+      } else {
+        httpResponse = error404.process(request);
+      }
     }
-  };
-  HttpRequestsHandler rootHandler = new HttpRequestsHandler() {
+  }
 
-
-    @Override
-    public String path() {
-      return "/";
-    }
-
-    @Override
-    public HttpMethod method() {
-      return HttpMethod.GET;
-    }
-
-    @Override
-    public HttpResponse process(HttpRequest request) {
-      final String htmlBody = "";
-      return new HttpResponse.Builder().status(ResponseStatus.OK_200).body(htmlBody).build();
-    }
-  };
   HttpRequestsHandler error404 = new HttpRequestsHandler() {
     @Override
     public String path() {
@@ -75,51 +100,10 @@ public class HttpRequestToResponse {
 
     @Override
     public HttpResponse process(HttpRequest request) {
-      String htmlBody =
-          "<h1>ERROR 404 </h1><h2>" + request.path() + " endPoint not found</h2>";
+      String htmlBody = "<h1>ERROR 404 </h1><h2>" + request.path() + " endPoint not found</h2>";
 
-      return new HttpResponse.Builder()
-          .status(ResponseStatus.ERROR_404)
-          .body(htmlBody).build();
+      return new HttpResponse.Builder().status(ResponseStatus.ERROR_404).body(htmlBody).build();
     }
   };
-
-
-  public void parseRequest() {
-    try {
-      this.out = socket.getOutputStream();
-      this.in = new StdBufferedReader(new InputStreamReader(socket.getInputStream()));
-      request = new Builder()
-          .path(new String(in.readLine()).split(" ")[1]).build();
-      System.out.println(request.path());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void executeRequest() {
-    parseRequest();
-    for (HttpRequestsHandler item : this.list) {
-      if (item.path().equals(request.path())) {
-        System.out.println(item.path() + " " + request.path());
-        httpResponse = item.process(request);
-        break;
-      } else {
-        httpResponse = error404.process(request);
-      }
-    }
-    try {
-      out.write(httpResponse.toString().getBytes());
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        socket.close();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-  }
 }
 

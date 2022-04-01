@@ -66,7 +66,6 @@ public class CsvHelper {
     }
     return values;
   }
-
   public static String[] stringAnalyzer(String line, char delimiter) {
     boolean quotesOpen = false;
     ArrayList<String> analyzedStrings = new ArrayList<>();

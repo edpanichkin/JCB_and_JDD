@@ -21,9 +21,7 @@ public class SelectRequest extends AbstractRequest<String[][]> {
     ArrayList<Integer> rowIndexes = findIndexInRows(csv, selector); // какие строчки менять (0,2)
     ArrayList<Integer> columnIndexToOut = new ArrayList<>();
     for (String column : columns) {
-      System.out.println();
       columnIndexToOut.add(indexOfValue(csv.headers(), column)); // индекс столбцов для вывода value
-
     }
     String[][] result = new String[rowIndexes.size()][columns.length];
 

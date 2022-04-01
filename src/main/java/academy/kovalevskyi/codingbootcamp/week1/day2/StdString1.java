@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class StdString1 implements Iterable<Character> {
+
   public final char[] value;
 
   public StdString1(char[] value) {
@@ -23,8 +24,8 @@ public class StdString1 implements Iterable<Character> {
   public StdString1 append(StdString1 that) {
     int totalLength = this.length() + that.length();
     char[] sumArr = new char[totalLength];
-    for (int i = 0; i < this.length(); i++) {
-      sumArr[i] = this.value[i];
+    if (this.length() >= 0) {
+      System.arraycopy(this.value, 0, sumArr, 0, this.length());
     }
     for (int i = 0; i < that.length(); i++) {
       sumArr[i + this.length()] = that.value[i];
@@ -96,21 +97,22 @@ public class StdString1 implements Iterable<Character> {
     for (Character c : this) {
       action.accept(c);
     }
-  }  
-  
+  }
+
   @Override
   public Iterator<Character> iterator() {
     return new Iterator<Character>() {
-      private int index = -1; 
+      private int index = -1;
+
       @Override
       public boolean hasNext() {
         return index < length() - 1;
       }
-      
+
       @Override
       public Character next() {
         if (!hasNext()) {
-          throw new NoSuchElementException();   
+          throw new NoSuchElementException();
         }
         index++;
         return charAt(index);
